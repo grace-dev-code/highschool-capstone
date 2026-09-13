@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Capstone Project</title>
+  <!--<link rel = "stylesheet" href="style.css">-->
+  <style>
+    div#game_ui {
+      position: absolute;
+      right: 1px;
+      top: 5%;
+      height: 60px;
+      width: 20%;
+      background-color: grey;
+    }
+    div#characterPic{
+      width: 100%;
+      height: 100%;
+    }
+
+    img#character_img {
+      object-fit: cover;
+      width: 50%;
+      height: 100%;
+    
+    }
+    div#health{
+      margin-top: -40%;
+    }
+    p#health_label{
+      float:left;
+      font-size: small;
+      font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      margin-top: 0%;
+      margin-left: 50%;
+    }
+    div#health_bar{
+      float: right;
+      margin-top: -15px;
+      width: 50%;
+      height: 10px;
+      background-color: red;
+      transition: width 0.5s ease-out;
+    }
+    div#stamina{
+      margin-top: -10%;
+    }
+    p#stamina_label{
+      float:left;
+      font-size: small;
+      font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      margin-top: 0%;
+      margin-left: 50%;
+    }
+    div#stamina_bar{
+      float: right;
+      margin-top: -15px;
+      width: 50%;
+      height: 10px;
+      background-color: blue;
+      transition: width 0.5s ease-out;
+    }
+    p#warnStam{
+      display:none;
+      font-size: small;
+      float:right;
+      margin-top: -15px;
+      margin-right: 10px;
+      transition: display 0.5s ease-out;
+    }
+
+    /* Inventory */
+
+    div#inventory_tab{
+      display:none;
+      position:fixed;
+      bottom: 80px;
+      left: 20px;
+      width: 200px;
+      height: 200px;
+      background-color: darkred;
+    }
+
+    img#bp_icon{
+      display:block;
+      position:fixed;
+      width:50px;
+      height:50px;
+      bottom: 20px;
+      left: 20px;
+      cursor: pointer;
+    }
+    img#rogue_img{
+      display: block;
+      position:fixed;
+      width: 50px;
+      height: 100px;
+      bottom: 175px;
+      left:25px;
+    }
+    div#center_dot{
+      position: fixed;
+      top: 52%;
+      left: 52%;
+      width: 6px;
+      height: 6px;
+      background-color: red;
+      border-radius: 50%;
+    }
+
+    div#control_instruction{
+      position:fixed;
+      font-size: small;
+      bottom:0px;
+      right: 0px;
+      width: 90px;
+      height: 150px;
+    }
+    div#cabins{
+      position: fixed;
+      display: block;
+      bottom: 80px;
+      left:20px;
+      width: 200px;
+      height:90px;
+      background-color: darkred;
+    }
+    div#cab_one{
+      position: fixed;
+      display: block;
+      width: 50px;
+      height: 50px;
+      bottom: 200px;
+      left: 80px;
+      background-color: darkred;
+      border:2px solid black;
+    }
+    div#cab_two{
+      position: fixed;
+      display: block;
+      width: 50px;
+      height: 50px;
+      bottom: 200px;
+      left: 160px;
+      background-color: darkred;
+      border:2px solid black;
+    }
+    div#health_cab{
+      position: fixed;
+      display: block;
+      width: 50px;
+      height: 50px;
+      bottom: 100px;
+      left: 50px;
+      background-color: darkred;
+      border:2px solid black;
+    }
+    div#stamina_cab{
+      position: fixed;
+      display: block;
+      width: 50px;
+      height: 50px;
+      bottom: 100px;
+      left: 140px;
+      background-color: darkred;
+      border: 2px solid black;
+    }
+    img#stamina_img{
+      display: none;
+      position: fixed;
+      width: 50px;
+      height: 50px;
+      bottom: 102px;
+      left: 141.8px;
+    }
+    img#health_img{
+      display: none;
+      position: fixed;
+      width: 50px;
+      height: 50px;
+      bottom: 102px;
+      left: 51.8px;
+    }
+    img#cab1_img{
+      display: block;
+      position: fixed;
+      width: 50px;
+      height: 50px;
+      bottom: 201px;
+      left: 81.8px;
+    }
+    img#cab2_img{
+      display: block;
+      position: fixed;
+      width: 50px;
+      height: 50px;
+      bottom: 201px;
+      left: 161.8px;
+    }
+
+    div#pickupTab{
+      position:fixed;
+      display:none;
+      bottom: 60px;
+      left: 40%;
+      background-color: white;
+      border: 2px solid black;
+      font-size: 20px;
+    }
+    div#pickupStamTab{
+      position:fixed;
+      display:none;
+      bottom: 60px;
+      left: 40%;
+      background-color: white;
+      border: 2px solid black;
+      font-size: 20px;
+    }
+    
+  </style>
+</head>
+
+<body>
+
+  <div id="control_instruction">
+      <p id="move"> WASD - Move</p>
+      <p id="run"> SHIFT - Run</p>
+      <p id="bp"> B - Backpack</p>
+      <p id="attack"> LMB - Attack</p>
+      <p id="quit"> ESC - Exit</p>
+  </div>
+  <div id='game_ui'>
+    <div id="center_dot"></div>
+    <div id='characterPic'>
+      <img src="assets/characterPic.png" id="character_img"> 
+    </div>
+    <div id='health'>
+      <p id="health_label"> Health</p>
+      <div id="health_bar"></div>
+    </div>
+    <div id ="stamina">
+      <p id="stamina_label">Stamina</p>
+      <div id="stamina_bar"></div>
+      <p id="warnStam"> No Stamina </p>
+    </div>
+  </div>
+
+  <div id ='potions'>
+    <div id ='pickupTab'> Press E to pick up potion </div>
+    <div id="pickupStamTab"> Press R to pick up potion</div>
+  </div>
+
+
+  <div id="inventory">
+    <div id="inventory_label">
+      <img src = 'assets/backpack.png' id = 'bp_icon'>
+      <div id="inventory_tab">
+        <img src = "assets/roguePic.png" id="rogue_img">
+        <div id="cabins">
+          <div id="cab_one">
+            <img src = 'assets/viking-helmet.png' id="cab1_img">
+          </div>
+          <div id="cab_two">
+            <img src="assets/abdominal-armor.png" id="cab2_img">
+          </div>
+          <div id="stamina_cab">
+            <img src = 'assets/standing-potion.png' id="stamina_img">
+          </div>
+          <div id="health_cab">
+            <img src = 'assets/health-potion.png' id="health_img">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
